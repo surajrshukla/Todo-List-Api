@@ -1,10 +1,10 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var app = express();
-var fs = require("fs");
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const app = express();
+const fs = require("fs");
 const cors = require('cors');
 
 const currentPath = path.resolve();
@@ -33,8 +33,14 @@ app.use(function (req, res, next) {
 });
 
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 app.use('/', indexRouter);
+
+const bucket_service = require('./routes/bucket_service');
+app.use('/bucket_service', bucket_service);
+
+const todo_service = require('./routes/todo_service');
+app.use('/todo_service', todo_service);
 
 
 app.use(function (req, res, next) {
